@@ -1,0 +1,46 @@
+spring:
+  server:
+    port: 8080
+
+  cors:
+    allowed-origins: "*"
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/my_savings?useSSL=false&serverTimeZone=UTC*useLegacyDateTimeCode=false
+    username: root
+    #    password: xeIvYqJbYrwVXbzGXEaU
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+  #    database-platform: org.hibernate.dialect.MySQLInnoDBDialect
+
+  debug: true
+
+  servlet:
+    multipart:
+      location: /static/images/osw-32n - peterjulius tsafaris.jpg
+
+  spring.mvc.pathmatch.matching-strategy: ant_path_matcher
+
+  STRIPE_SECRET_KEY: sk_test_51MevffJ7qeZtbDAlnjOB9rNdQVtptp7nelM4vP8JVXDJUafp2LVEdpOv1PQ7HDTyo8zQt9laJeN56Sbco0SQjDRy00Tk5xLMiu
+
+  alterna:
+    app:
+      jwtSecret: alternaSecretkey
+      jwtExpirationMs: 86400000
+
+  logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG
+
+
+#  BASEURL: http://localhost:8082/
+
