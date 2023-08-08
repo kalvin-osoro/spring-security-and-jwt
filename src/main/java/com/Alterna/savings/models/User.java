@@ -1,21 +1,21 @@
 package com.Alterna.savings.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.lang.NonNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
 
-//@Data
+@Data
 //@Builder
 //@AllArgsConstructor
 //@NoArgsConstructor
+@Setter
+@Getter
 @Entity
+//@RequiredArgsConstructor
 @Table(name = "user",
 uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),

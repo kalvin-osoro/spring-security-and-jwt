@@ -6,14 +6,14 @@ spring:
     allowed-origins: "*"
 
   datasource:
-    url: jdbc:mysql://localhost:3306/my_savings?useSSL=false&serverTimeZone=UTC*useLegacyDateTimeCode=false
+    url: jdbc:mysql://localhost:3306/apple?useSSL=false
     username: root
     #    password: xeIvYqJbYrwVXbzGXEaU
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true

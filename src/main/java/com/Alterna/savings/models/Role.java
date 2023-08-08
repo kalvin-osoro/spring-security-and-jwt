@@ -1,16 +1,16 @@
 package com.Alterna.savings.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 //@Data
 //@Builder
 //@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
+@Getter
+@Setter
+//@RequiredArgsConstructor
 @Table(name = "roles")
 public class Role {
     @Id
