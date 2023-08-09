@@ -1,6 +1,6 @@
-package com.Alterna.savings.security.services;
+package com.Alterna.savings.services;
 
-import org.springframework.lang.NonNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.Alterna.savings.models.User;
@@ -27,7 +27,8 @@ public class UserDetailsImpl implements UserDetails {
     //    @Email
     private String email;
 
-        private String password;
+    @JsonIgnore
+    private String password;
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -44,7 +45,11 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
+
     public static UserDetailsImpl build(User user) {
+//        we convert Set<Role> into List<GrantedAuthority>. It is
+//        important to work with Spring Security and Authentication
+//        object later.
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
@@ -57,12 +62,15 @@ public class UserDetailsImpl implements UserDetails {
                 authorities);
             }
 
+
+
             @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+            public Collection<? extends GrantedAuthority> getAuthorities() {
                 return authorities;
             }
 
-    public Long getId() {
+
+            public Long getId() {
         return id;
     }
 

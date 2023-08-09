@@ -30,10 +30,10 @@ spring:
 
   STRIPE_SECRET_KEY: sk_test_51MevffJ7qeZtbDAlnjOB9rNdQVtptp7nelM4vP8JVXDJUafp2LVEdpOv1PQ7HDTyo8zQt9laJeN56Sbco0SQjDRy00Tk5xLMiu
 
-  alterna:
-    app:
-      jwtSecret: alternaSecretkey
-      jwtExpirationMs: 86400000
+alterna:
+  app:
+    jwtSecret: alternaSecretkey
+    jwtExpirationMs: 86400000
 
   logging:
     level:

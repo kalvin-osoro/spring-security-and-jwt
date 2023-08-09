@@ -1,12 +1,13 @@
 package com.Alterna.savings.payload.request;
 
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.lang.NonNull;
 
 public class LoginRequest {
-    @NonNull
+    @NotBlank
     private String username;
 
-    @NonNull
+    @NotBlank
     private String password;
 
     public String getUsername() {

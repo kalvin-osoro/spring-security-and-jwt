@@ -10,17 +10,15 @@ import com.Alterna.savings.payload.response.MessageResponse;
 import com.Alterna.savings.repository.RoleRepository;
 import com.Alterna.savings.repository.UserRepository;
 import com.Alterna.savings.security.jwt.JwtUtils;
-import com.Alterna.savings.security.services.UserDetailsImpl;
+import com.Alterna.savings.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -30,7 +28,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -77,7 +75,7 @@ public class AuthController {
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in user!"));
+                    .body(new MessageResponse("Error: Email is already in use!"));
 
         }
         //create new user's account

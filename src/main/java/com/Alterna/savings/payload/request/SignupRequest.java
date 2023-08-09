@@ -1,18 +1,21 @@
 package com.Alterna.savings.payload.request;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 
 import java.util.Set;
 
 public class SignupRequest {
 
-    @NonNull
-//    @Size(min = 3, max = 20)
+    @NotBlank
+    @Size(min = 3, max = 20)
     private String username;
 
-    @NonNull
-//    @Size(max = 50)
-//    @Email
+    @NotBlank
+    @Size(max = 50)
+    @Email
     private String email;
 
     private Set<String> role;

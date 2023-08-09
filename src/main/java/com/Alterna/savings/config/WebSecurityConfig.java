@@ -2,31 +2,32 @@ package com.Alterna.savings.config;
 
 import com.Alterna.savings.security.jwt.AuthEntryPointJwt;
 import com.Alterna.savings.security.jwt.AuthTokenFilter;
-import com.Alterna.savings.security.services.UserDetailsServiceImpl;
+import com.Alterna.savings.services.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true)
+@EnableMethodSecurity
+@RequiredArgsConstructor
+//        (
+//        prePostEnabled = true)
 public class WebSecurityConfig  {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    private final AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -35,12 +36,12 @@ public class WebSecurityConfig  {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-        authenticationProvider.setUserDetailsService( userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setUserDetailsService( userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
 
-        return authenticationProvider;
+        return authProvider;
     }
 
 
