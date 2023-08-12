@@ -30,26 +30,29 @@ public class JwtUtils {
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(key(),SignatureAlgorithm.HS256)
+//                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
     private Key key(){
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public String getUserNameFromJwtToken(String jwtToken) {
-        return Jwts.parser().setSigningKey(key()).parseClaimsJws(jwtToken).getBody().getSubject();
-//        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(jwtToken).getBody().getSubject();
+    public String getUserNameFromJwtToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(token).getBody().getSubject();
     }
+
+//    public String getUserNameFromJwtToken(String jwtToken) {
+//        return Jwts.parser().setSigningKey(key()).parseClaimsJws(jwtToken).getBody().getSubject();
+////        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(jwtToken).getBody().getSubject();
+//    }
 
     public boolean validateJwtToken(String authToken) {
         try {
-//            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(authToken);
-            Jwts.parser().setSigningKey(key()).parse(authToken);
+            Jwts.parserBuilder().setSigningKey(key()).build().parse(authToken);
             return true;
-        } catch (SignatureException e) {
-            logger.error("Invalid JWT signature: {}", e.getMessage());
-        }  catch (MalformedJwtException e) {
+        } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
             logger.error("JWT token is expired: {}", e.getMessage());
