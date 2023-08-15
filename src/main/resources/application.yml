@@ -33,7 +33,7 @@ spring:
 alterna:
   app:
     jwtSecret: alternaSecretkeyddakMDKAJNJNJNJNJNMXLXAJKDDMSKXMXAXXAX
-    jwtExpirationMs: 86400000
+    jwtExpirationMs: 86400000 #24 hours
 
   logging:
     level:

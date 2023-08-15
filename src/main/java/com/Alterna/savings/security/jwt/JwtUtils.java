@@ -31,7 +31,6 @@ public class JwtUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key(),SignatureAlgorithm.HS256)
-//                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
     private Key key(){
